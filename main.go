@@ -62,21 +62,32 @@ func main() {
 	printEnv(envvars, showerr)
 }
 
-func printEnv(vars interface{}, showerr bool) {
-	v, ok := vars.(map[string]interface{})
+func printEnv(_vars interface{}, showerr bool) {
+	vars, ok := _vars.(map[string]interface{})
 	if !ok {
+		if _vars == nil {
+			os.Exit(0)
+		}
 		if showerr {
 			fmt.Printf("Data type is map[string]string only: %#v", vars)
 		}
 		os.Exit(1)
 	}
-	for ek, ev := range v {
-		if _, ok := ev.(string); !ok {
+	for k, ev := range vars {
+		switch v := ev.(type) {
+		case string:
+			fmt.Printf("export %s=%s\n", k, v)
+		case float64:
+			// When expressing floating, please define it as a character string.
+			// e.g. TEST: "3.2"
+			fmt.Printf("export %s=%d\n", k, int(v))
+		case nil:
+			fmt.Printf("export %s=\n", k)
+		default:
 			if showerr {
-				fmt.Printf("Value is string only: %v", ev)
+				fmt.Printf("Value is string only: %#v", ev)
 			}
 			os.Exit(1)
 		}
-		fmt.Printf("export %s=%s\n", ek, ev)
 	}
 }
