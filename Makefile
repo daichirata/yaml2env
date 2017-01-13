@@ -1,4 +1,4 @@
-VERSION := v0.1.0
+VERSION := v0.1.1
 
 GOFILES := $(shell find . -type f -name *.go -not -path */vendor/*)
 GOPKG_NOVENDOR := glide nv

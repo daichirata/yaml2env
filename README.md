@@ -5,8 +5,8 @@ Pass the value from the yaml file to the environment variable.
 ## Install
 
 ``` shell
-curl -sLO https://github.com/daichirata/yaml2env/releases/download/v0.1.0/yaml2env-v0.1.0-$(uname)-amd64 \
-  && mv yaml2env-v0.1.0-$(uname)-amd64 /usr/local/bin/yaml2env \
+curl -sLO https://github.com/daichirata/yaml2env/releases/download/v0.1.1/yaml2env-v0.1.1-$(uname)-amd64 \
+  && mv yaml2env-v0.1.1-$(uname)-amd64 /usr/local/bin/yaml2env \
   && chmod +x /usr/local/bin/yaml2env
 ```
 
