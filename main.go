@@ -76,11 +76,11 @@ func printEnv(_vars interface{}, showerr bool) {
 	for k, ev := range vars {
 		switch v := ev.(type) {
 		case string:
-			fmt.Printf("export %s=%s\n", k, v)
+			fmt.Printf("export %s=\"%s\"\n", k, v)
 		case float64:
 			// When expressing floating, please define it as a character string.
 			// e.g. TEST: "3.2"
-			fmt.Printf("export %s=%d\n", k, int(v))
+			fmt.Printf("export %s=\"%d\"\n", k, int(v))
 		case nil:
 			fmt.Printf("export %s=\n", k)
 		default:
