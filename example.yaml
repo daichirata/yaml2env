@@ -4,3 +4,4 @@ development:
 staging:
   test_key_1: test-value-staging-1
   TEST_KEY_2: test-value-staging-2
+  TEST-Key-3: test-String

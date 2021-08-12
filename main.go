@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ghodss/yaml"
+	"sigs.k8s.io/yaml"
 )
 
 func main() {
@@ -77,6 +77,7 @@ func printEnv(_vars interface{}, showerr bool, toupper bool) {
 		os.Exit(1)
 	}
 	for k, ev := range vars {
+		k = strings.ReplaceAll(k, "-", "_")
 		if toupper {
 			k = strings.ToUpper(k)
 		}
