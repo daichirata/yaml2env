@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/ghodss/yaml"
 )
@@ -13,10 +14,12 @@ func main() {
 	var (
 		env     string
 		showerr bool
+		toupper bool
 	)
 
 	flag.StringVar(&env, "e", "", "Environment")
 	flag.BoolVar(&showerr, "s", false, "Do not suppress error output")
+	flag.BoolVar(&toupper, "u", false, "Convert veriable name to uppercase")
 
 	flag.Parse()
 
@@ -49,7 +52,7 @@ func main() {
 	}
 
 	if env == "" {
-		printEnv(vars, showerr)
+		printEnv(vars, showerr, toupper)
 		return
 	}
 	envvars, ok := vars[env]
@@ -59,10 +62,10 @@ func main() {
 		}
 		os.Exit(1)
 	}
-	printEnv(envvars, showerr)
+	printEnv(envvars, showerr, toupper)
 }
 
-func printEnv(_vars interface{}, showerr bool) {
+func printEnv(_vars interface{}, showerr bool, toupper bool) {
 	vars, ok := _vars.(map[string]interface{})
 	if !ok {
 		if _vars == nil {
@@ -74,6 +77,9 @@ func printEnv(_vars interface{}, showerr bool) {
 		os.Exit(1)
 	}
 	for k, ev := range vars {
+		if toupper {
+			k = strings.ToUpper(k)
+		}
 		switch v := ev.(type) {
 		case string:
 			fmt.Printf("export %s=\"%s\"\n", k, v)
