@@ -24,6 +24,7 @@ Usage of yaml2env:
   -e string
     	Environment
   -s	Do not suppress error output
+  -u    Convert variable name to all upper
 ```
 
 **Basic useage**
@@ -44,18 +45,22 @@ $ eval $(yaml2env env.yaml)
 **Specific environment name**
 
 ``` shell
-$ cat env.yaml
+$ cat example.yaml
 development:
-  TEST_KEY_1: test-value-development-1
+  test_key_1: test-value-development-1
 
 staging:
-  TEST_KEY_1: test-value-staging-1
+  test_key_1: test-value-staging-1
   TEST_KEY_2: test-value-staging-2
 
-$ yaml2env -e development env.yaml
-export TEST_KEY_1=test-value-development-1
+$ yaml2env -e development example.yaml
+export test_key_1=test-value-development-1
 
-$ yaml2env -e staging env.yaml
+$ yaml2env -e staging example.yaml
+export test_key_1=test-value-staging-1
+export TEST_KEY_2=test-value-staging-2
+
+$ yaml2env -e staging -u example.yaml
 export TEST_KEY_1=test-value-staging-1
 export TEST_KEY_2=test-value-staging-2
 ```

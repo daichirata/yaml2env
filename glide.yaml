@@ -1,3 +1,0 @@
-package: github.com/daichirata/yaml2env
-import:
-- package: github.com/ghodss/yaml
