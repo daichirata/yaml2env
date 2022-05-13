@@ -1,4 +1,4 @@
-VERSION := v0.1.2
+VERSION := v0.1.3
 
 GOFILES := $(shell find . -type f -name *.go -not -path */vendor/*)
 
